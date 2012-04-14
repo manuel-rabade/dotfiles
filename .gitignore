@@ -5,5 +5,7 @@
 !.bash_profile
 !.bashrc
 !.emacs
+!.elisp
+!.elisp/*
 !.gitconfig
 !.gitignore

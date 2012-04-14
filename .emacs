@@ -122,6 +122,9 @@
 ;; --------------------------------------------------------------------
 ;; modes
 
+;; local path
+(add-to-list 'load-path "~/.elisp/")
+
 ;; perl-mode
 (setq perl-mode-hook
  '(lambda ()
@@ -139,6 +142,10 @@
   (setq tab-width 4)) 
 (setq auto-mode-alist (cons '("\\.ebuild\\'" . ebuild-mode) auto-mode-alist)) 
 (setq auto-mode-alist (cons '("\\.eclass\\'" . ebuild-mode) auto-mode-alist))
+
+;; sql-mode
+(eval-after-load "sql"
+  '(load-library "sql-indent"))
 
 ;; --------------------------------------------------------------------
 ;; custom settings
@@ -166,3 +173,5 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)

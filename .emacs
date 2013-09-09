@@ -103,7 +103,6 @@
 
 ;; easy switching to buffers
 (require 'iswitchb)
-(iswitchb-default-keybindings)
 
 ;; match parenthesis
 (defun match-paren (arg)

@@ -34,6 +34,6 @@ if [ -x /usr/bin/screen ]; then
 fi
 
 # source local bash
-if [ -f $HOME/.bash_local ]; then
-    source $HOME/.bash_local
+if [ -f "${HOME}/.bash_local" ]; then
+    source ${HOME}/.bash_local
 fi

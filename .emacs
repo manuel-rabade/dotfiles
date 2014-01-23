@@ -26,7 +26,7 @@
 (global-font-lock-mode t)
 
 ;; show matching parens
-(require 'paren) 
+(require 'paren)
 
 ;; show bracket matching
 (show-paren-mode t)
@@ -99,7 +99,7 @@
 
 ;; aspell
 (setq-default ispell-program-name "aspell")
-(setq-default ispell-dictionary "es")
+(setq ispell-dictionary "es")
 
 ;; easy switching to buffers
 (require 'iswitchb)
@@ -154,10 +154,10 @@
 (setq-default auto-save-default t)
 (setq-default auto-save-interval 300)
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
  '(display-time-mode t)
  '(indent-tabs-mode nil)
@@ -167,10 +167,10 @@
  '(transient-mark-mode t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)

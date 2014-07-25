@@ -12,16 +12,16 @@ export PATH="${PATH}:${HOME}/bin"
 export DICTIONARY="es_MX,en_US"
 export XSESSION="Xfce4"
 
-# editor
-if [ -x /usr/bin/emacs ]; then
-    export EDITOR="/usr/bin/emacs"
-    alias ec="emacs -nw"
-fi
-
 # test for an interactive shell
 if [[ $- != *i* ]] ; then
         # shell is non-interactive
         return
+fi
+
+# editor
+if [ -x /usr/bin/emacs ]; then
+    export EDITOR="/usr/bin/emacs"
+    alias ec="emacs -nw"
 fi
 
 # aliases

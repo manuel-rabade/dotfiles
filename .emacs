@@ -50,7 +50,7 @@
 (setq-default indent-tabs-mode nil)
 
 ; cutoff for word wrap
-(setq-default fill-column 71)
+(setq-default fill-column 72)
 
 ;; treat 'y' or <CR> as yes, 'n' as no
 (fset 'yes-or-no-p 'y-or-n-p)

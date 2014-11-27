@@ -162,6 +162,7 @@
  '(display-time-mode t)
  '(indent-tabs-mode nil)
  '(javascript-indent-level 2)
+ '(safe-local-variable-values (quote ((encoding . utf-8))))
  '(show-paren-mode t)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
  '(transient-mark-mode t)

@@ -28,6 +28,7 @@ fi
 alias grep="grep --color=auto"
 alias ls="ls --color=auto -F -h"
 alias duff="diff -u"
+alias yank="rsync -av --delete"
 
 if [ -x /usr/bin/screen ]; then
     alias myscreen="screen -a -D -R -S ${USER}"

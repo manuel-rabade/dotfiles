@@ -95,7 +95,7 @@
 ;; misc
 
 ;; gentoo stuff
-(require 'site-gentoo)
+;(require 'site-gentoo)
 
 ;; aspell
 (setq-default ispell-program-name "aspell")

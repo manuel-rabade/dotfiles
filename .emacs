@@ -1,19 +1,9 @@
 ;; ~/.emacs
 
 ;; --------------------------------------------------------------------
-;; fonts, faces and eveything in the buffer
+;; fonts, faces & eveything in the buffer
 
-;; encoding
-(setq locale-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-
-;; disable menu bar
-(menu-bar-mode -1)
-
-;; font, colors and cursor
+;; font, colors & cursor
 (setq default-frame-alist
  '((font . "-*-terminal-medium-r-*-*-14-*-*-*-*-*-iso8859-1")
    (cursor-color . "Green")
@@ -37,32 +27,49 @@
 ;; highlight selected regions
 (transient-mark-mode t)
 
-;; when on a tab, make the cursor the tab length
-(setq-default x-stretch-cursor t)
-
-;; disable startup message
-(setq inhibit-startup-message t)
-
-;; --------------------------------------------------------------------
-;; mouse, keyboard and keybindings
+; cutoff for word wrap
+(setq-default fill-column 72)
 
 ;; use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
-; cutoff for word wrap
-(setq-default fill-column 72)
+;; when on a tab, make the cursor the tab length
+(setq-default x-stretch-cursor t)
+
+;; remove trailing whitespace
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+; newline at the end of file
+(setq require-final-newline 't)
+
+;; encoding
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
+;; --------------------------------------------------------------------
+;; mouse, keyboard & keybindings
 
 ;; treat 'y' or <CR> as yes, 'n' as no
 (fset 'yes-or-no-p 'y-or-n-p)
     (define-key query-replace-map [return] 'act)
     (define-key query-replace-map [?\C-m] 'act)
 
-
-;; C-- keybinding for undo (removes the shift) 
-(global-set-key [(control -)] 'undo)
-
 ;; goto-line
 (global-set-key "\C-cc" 'goto-line)
+
+;; match parenthesis
+(defun match-paren (arg)
+  "Go to the matching parenthesis if on parenthesis otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+        (t (self-insert-command (or arg 1)))
+  )
+)
+(global-set-key "\C-xx" 'match-paren)
 
 ;; mouse yank
 (setq mouse-yank-at-point 't)
@@ -82,47 +89,10 @@
 (global-set-key [C-mouse-5] 'up-a-lot)
 
 ;; --------------------------------------------------------------------
-;; status bar
-
-;; time
-(display-time)
-
-;; display the column number of the point in the mode line
-(column-number-mode t)
-(line-number-mode t)
-
-;; --------------------------------------------------------------------
-;; misc
-
-;; gentoo stuff
-(require 'site-gentoo)
-
-;; aspell
-(setq-default ispell-program-name "aspell")
-(setq ispell-dictionary "es")
-
-;; easy switching to buffers
-(require 'iswitchb)
-
-;; match parenthesis
-(defun match-paren (arg)
-  "Go to the matching parenthesis if on parenthesis otherwise insert %."
-  (interactive "p")
-  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-        (t (self-insert-command (or arg 1)))
-  )
-)
-(global-set-key "\C-xx" 'match-paren)
-
-;; visible bell
-(setq visible-bell t)
-
-;; --------------------------------------------------------------------
 ;; modes
 
-;; local path
-(add-to-list 'load-path "~/.elisp/")
+;; local modes
+(add-to-list 'load-path "~/.emacs.d/elisp/")
 
 ;; perl-mode
 (setq perl-mode-hook
@@ -134,32 +104,79 @@
   (auto-fill-mode t)))
 
 ;; ebuild-mode
-(defun ebuild-mode () 
-  (shell-script-mode) 
-  (sh-set-shell "bash") 
-  (make-local-variable 'tab-width) 
-  (setq tab-width 4)) 
-(setq auto-mode-alist (cons '("\\.ebuild\\'" . ebuild-mode) auto-mode-alist)) 
+(defun ebuild-mode ()
+  (shell-script-mode)
+  (sh-set-shell "bash")
+  (make-local-variable 'tab-width)
+  (setq tab-width 4))
+(setq auto-mode-alist (cons '("\\.ebuild\\'" . ebuild-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.eclass\\'" . ebuild-mode) auto-mode-alist))
 
 ;; sql-mode
 (eval-after-load "sql"
   '(load-library "sql-indent"))
 
+;; c mode for arduino
+(add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode))
+
+;; gentoo
+(require 'site-gentoo)
+
+;; --------------------------------------------------------------------
+;; backup & auto save
+
+(setq-default
+ backup-by-copying t
+ backup-directory-alist '(("." . "~/.emacs.d/auto-backup"))
+ delete-old-versions t
+ kept-new-versions 10
+ kept-old-versions 0
+ version-control t
+ auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save/\\1" t))
+ auto-save-default t
+ auto-save-timeout 60
+ auto-save-interval 100)
+
+(require 'backup-each-save)
+(add-hook 'after-save-hook 'backup-each-save)
+(setq backup-each-save-mirror-location "~/.emacs.d/backup-each-save")
+
+;; --------------------------------------------------------------------
+;; misc
+
+;; aspell
+(setq-default
+ ispell-program-name "aspell"
+ ispell-dictionary "es")
+
+;; disable menu bar
+(menu-bar-mode -1)
+
+;; disable startup message
+(setq inhibit-startup-message t)
+
+;; visible bell
+(setq visible-bell t)
+
+;; time
+(display-time-mode t)
+
+; show line numbers
+(global-linum-mode 1)
+(setq linum-format "%d ")
+
+;; display the column number of the point in the mode line
+(column-number-mode t)
+(line-number-mode t)
+
 ;; --------------------------------------------------------------------
 ;; custom settings
 
-(auto-save-mode -1)
-(setq-default make-backup-files nil)
-(setq-default auto-save-default t)
-(setq-default auto-save-interval 300)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(auto-save-default nil)
- '(display-time-mode t)
  '(indent-tabs-mode nil)
  '(javascript-indent-level 2)
  '(safe-local-variable-values (quote ((encoding . utf-8))))

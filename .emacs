@@ -120,7 +120,7 @@
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode))
 
 ;; gentoo
-(require 'site-gentoo)
+(require 'site-gentoo nil 'noerror)
 
 ;; --------------------------------------------------------------------
 ;; backup & auto save

@@ -125,6 +125,7 @@
 ;; --------------------------------------------------------------------
 ;; backup & auto save
 
+(make-directory "~/.emacs.d/auto-save" t)
 (setq-default
  backup-by-copying t
  backup-directory-alist '(("." . "~/.emacs.d/auto-backup"))

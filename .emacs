@@ -119,6 +119,9 @@
 ;; c mode for arduino
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode))
 
+;; go lang
+(require 'go-mode-autoloads)
+
 ;; gentoo
 (require 'site-gentoo nil 'noerror)
 

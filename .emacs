@@ -119,8 +119,18 @@
 ;; c mode for arduino
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode))
 
+;; go lang
+(require 'go-mode-autoloads)
+(add-hook 'before-save-hook #'gofmt-before-save)
+
 ;; gentoo
 (require 'site-gentoo nil 'noerror)
+
+;; markdown
+(when (require 'markdown-mode nil 'noerror)
+  (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
 ;; --------------------------------------------------------------------
 ;; backup & auto save

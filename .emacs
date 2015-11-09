@@ -3,6 +3,9 @@
 ;; --------------------------------------------------------------------
 ;; fonts, faces & eveything in the buffer
 
+;; set frame title
+(setq frame-title-format "%b")
+
 ;; disable toolbar
 (tool-bar-mode -1)
 

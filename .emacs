@@ -3,6 +3,9 @@
 ;; --------------------------------------------------------------------
 ;; fonts, faces & eveything in the buffer
 
+;; disable toolbar
+(tool-bar-mode -1)
+
 ;; font, colors & cursor
 (setq default-frame-alist
  '((font . "-*-terminal-medium-r-*-*-14-*-*-*-*-*-iso8859-1")

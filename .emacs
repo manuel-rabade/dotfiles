@@ -3,6 +3,12 @@
 ;; --------------------------------------------------------------------
 ;; fonts, faces & eveything in the buffer
 
+;; set frame title
+(setq frame-title-format "%b")
+
+;; disable toolbar
+(tool-bar-mode -1)
+
 ;; font, colors & cursor
 (setq default-frame-alist
  '((font . "-*-terminal-medium-r-*-*-14-*-*-*-*-*-iso8859-1")

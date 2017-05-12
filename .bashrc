@@ -15,10 +15,10 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 export PATH="${PATH}:${HOME}/bin"
 
 # test for an interactive shell
-if [[ $- != *i* ]] ; then
-        # shell is non-interactive
-        return
-fi
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
 # window size
 shopt -s checkwinsize
@@ -35,9 +35,13 @@ else
 fi
 
 # title
-if [[ "$TERM" =~ "xterm*|rxvt*" ]]; then
+case "$TERM" in
+xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-fi
+    ;;
+*)
+    ;;
+esac
 
 # color
 if [ -x /usr/bin/dircolors ]; then

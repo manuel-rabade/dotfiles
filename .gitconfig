@@ -3,3 +3,9 @@
 	email = manuel@rabade.net
 [push]
 	default = simple
+
+[alias]
+	alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+        ls = ls-tree -r master --name-only
+	state = !git fetch origin && git remote show origin && :
+        sync = !git fetch origin && git remote prune origin && :

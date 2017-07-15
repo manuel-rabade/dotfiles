@@ -2,7 +2,7 @@
 	name = Manuel Rabade
 	email = manuel@rabade.net
 [push]
-	default = simple
+        default = simple
 
 [alias]
 	alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /

@@ -34,7 +34,7 @@
 (transient-mark-mode t)
 
 ; cutoff for word wrap
-(setq-default fill-column 72)
+(setq-default fill-column 160)
 
 ;; use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
@@ -103,8 +103,7 @@
 ;; perl-mode
 (setq perl-mode-hook
  '(lambda ()
-   (setq fill-column 72
-    indent-tabs-mode nil
+   (setq indent-tabs-mode nil
     next-line-add-newlines nil
     standard-indent 2)
   (auto-fill-mode t)))

@@ -7,7 +7,7 @@
 (setq frame-title-format "%b")
 
 ;; disable toolbar
-(if (functionp 'tool-bar-mode) (tool-bar-mode nil))
+(if (functionp 'tool-bar-mode) (tool-bar-mode -1))
 
 ;; font, colors & cursor
 (setq default-frame-alist

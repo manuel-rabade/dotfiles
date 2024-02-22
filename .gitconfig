@@ -10,3 +10,6 @@
         ls = ls-tree -r master --name-only
         state = !git fetch origin && git remote show origin && :
         sync = !git fetch origin && git remote prune origin && :
+        undo = reset --soft HEAD^
+        mail-econduce = config user.email manuel@econduce.mx
+        mail-rabade = config user.email manuel@rabade.net

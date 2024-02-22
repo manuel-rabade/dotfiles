@@ -1,5 +1,13 @@
 ;; ~/.emacs
 
+(setq mac-option-key-is-meta t)
+(setq mac-command-key-is-meta nil)
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier nil)
+
+(when (file-directory-p "~/.emacs.d/elisp/php-mode-1.23.0")
+  (load "~/.emacs.d/elisp/php-mode-1.23.0/php-mode-autoloads.el"))
+
 ;; --------------------------------------------------------------------
 ;; fonts, faces & eveything in the buffer
 

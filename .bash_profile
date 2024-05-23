@@ -8,8 +8,10 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # run ssh-agent & ssh-add in non-desktop logins
-if [ -f ${HOME}/.ssh/id_rsa -a -z "$DESKTOP_SESSION" ]; then
-    eval $(/usr/bin/ssh-agent -s) > /dev/null
-    trap "kill ${SSH_AGENT_PID}" 0
-    /usr/bin/ssh-add ${HOME}/.ssh/id_rsa
+if [ $(uname) = "Linux" ]; then
+    if [ -f ${HOME}/.ssh/id_ed25519 -a -z "$DESKTOP_SESSION" ]; then
+        eval $(/usr/bin/ssh-agent -s) > /dev/null
+        trap "kill ${SSH_AGENT_PID}" 0
+        /usr/bin/ssh-add ${HOME}/.ssh/id_ed25519
+    fi
 fi

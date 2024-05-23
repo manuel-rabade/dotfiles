@@ -95,6 +95,14 @@
 (global-set-key [C-mouse-5] 'up-a-lot)
 
 ;; --------------------------------------------------------------------
+;; mac os
+
+(setq mac-option-key-is-meta t)
+(setq mac-command-key-is-meta nil)
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier nil)
+
+;; --------------------------------------------------------------------
 ;; modes
 
 ;; local modes
@@ -140,6 +148,10 @@
 ;; puppet
 (autoload 'puppet-mode "puppet-mode" "Major mode for editing puppet manifests")
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
+
+;; php
+(when (file-directory-p "~/.emacs.d/elisp/php-mode-1.23.0")
+  (load "~/.emacs.d/elisp/php-mode-1.23.0/php-mode-autoloads.el"))
 
 ;; --------------------------------------------------------------------
 ;; backup & auto save

@@ -10,3 +10,4 @@
         ls = ls-tree -r master --name-only
         state = !git fetch origin && git remote show origin && :
         sync = !git fetch origin && git remote prune origin && :
+        undo = reset --soft HEAD^

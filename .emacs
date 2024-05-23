@@ -194,8 +194,7 @@
 (display-time-mode t)
 
 ; show line numbers
-(global-linum-mode 1)
-(setq linum-format "%d ")
+(global-display-line-numbers-mode 1)
 
 ;; display the column number of the point in the mode line
 (column-number-mode t)

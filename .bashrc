@@ -1,11 +1,22 @@
 # ~/.bashrc
 
-# history
+# test for an interactive shell
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# shell history
 HISTFILESIZE=10000
 HISTSIZE=5000
 HISTCONTROL=ignoredups
 
-# environment
+# shell options
+shopt -s checkwinsize
+shopt -s histappend
+shopt -s globstar
+
+# environment variables
 export BLOCKSIZE=K
 export LESS='-c -r -f'
 export GREP_COLOR=31
@@ -14,16 +25,22 @@ export DICTIONARY='es_MX,en_US'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export PATH="${PATH}:${HOME}/bin"
 
-# test for an interactive shell
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# editor
+if [ -x /usr/bin/emacs ]; then
+    export EDITOR='/usr/bin/emacs'
+fi
 
-# window size
-shopt -s checkwinsize
+# make less friendly for non-text
+if [ -x /usr/bin/lesspipe ]; then
+    eval "$(SHELL=/bin/sh lesspipe)"
+fi
 
-# prompt
+# chroot?
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# fancy prompt
 if [ -x /usr/bin/tput ] && tput setaf 1 >& /dev/null; then
     if [[ ${EUID} == 0 ]]; then
         PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
@@ -34,16 +51,16 @@ else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h \w \$ '
 fi
 
-# title
+# term title
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+    xterm*|rxvt*)
+        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+        ;;
+    *)
+        ;;
 esac
 
-# color
+# ls colors
 if [ -x /usr/bin/dircolors ]; then
     if [ -r ~/.dircolors ]; then
         eval "$(dircolors -b ~/.dircolors)"
@@ -58,26 +75,10 @@ else
     alias ls='ls -F -h'
 fi
 
-# lesspipe
-if [ -x /usr/bin/lesspipe ]; then
-    eval "$(SHELL=/bin/sh lesspipe)"
-fi
-
-# editor
-if [ -x /usr/bin/emacs ]; then
-    export EDITOR='/usr/bin/emacs'
-fi
-
-# bash completion
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-
 # aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 alias duff='diff -u'
 alias yank='rsync -av --delete'
 alias myscreen="screen -a -D -R -S ${USER}"
@@ -87,4 +88,13 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # local bash
 if [ -f ${HOME}/.bash_local ]; then
     source ${HOME}/.bash_local
+fi
+
+# bash completion
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
 fi

@@ -14,7 +14,6 @@ HISTCONTROL=ignoredups
 # shell options
 shopt -s checkwinsize
 shopt -s histappend
-shopt -s globstar
 
 # environment variables
 export BLOCKSIZE=K

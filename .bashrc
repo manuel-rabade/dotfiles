@@ -15,7 +15,7 @@ HISTCONTROL=ignoredups
 shopt -s checkwinsize
 shopt -s histappend
 
-# environment variables
+# environment config
 export BLOCKSIZE=K
 export LESS='-c -r -f'
 export GREP_COLOR=31
@@ -23,11 +23,6 @@ export LC_CTYPE='es_MX.UTF-8'
 export DICTIONARY='es_MX,en_US'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export PATH="${PATH}:${HOME}/bin:${HOME}/.local/bin"
-
-# editor
-if [ -x /usr/bin/emacs ]; then
-    export EDITOR='/usr/bin/emacs'
-fi
 
 # make less friendly for non-text
 if [ -x /usr/bin/lesspipe ]; then
@@ -74,17 +69,18 @@ else
     alias ls='ls -F -h'
 fi
 
-# aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias duff='diff -u'
-alias yank='rsync -av --delete'
-alias myscreen="screen -a -D -R -S ${USER}"
-alias ec='emacs -nw'
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# emacs
+if [ -x /usr/bin/emacs ]; then
+    export EDITOR='/usr/bin/emacs'
+    alias ec='emacs -nw'
+fi
 
-# local bash
+# aliases
+if [ -f ${HOME}/.bash_aliases ]; then
+    source ${HOME}/.bash_aliases
+fi
+
+# local config
 if [ -f ${HOME}/.bash_local ]; then
     source ${HOME}/.bash_local
 fi

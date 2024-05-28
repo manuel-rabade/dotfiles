@@ -70,8 +70,8 @@ else
 fi
 
 # emacs
-if [ -x /usr/bin/emacs ]; then
-    export EDITOR='/usr/bin/emacs'
+if [ -n $(command -v emacs) ]; then
+    export EDITOR=emacs
     alias ec='emacs -nw'
 fi
 

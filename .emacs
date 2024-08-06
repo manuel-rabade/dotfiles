@@ -102,42 +102,16 @@
     standard-indent 2)
   (auto-fill-mode t)))
 
-;; ebuild-mode
-(defun ebuild-mode ()
-  (shell-script-mode)
-  (sh-set-shell "bash")
-  (make-local-variable 'tab-width)
-  (setq tab-width 4))
-(setq auto-mode-alist (cons '("\\.ebuild\\'" . ebuild-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.eclass\\'" . ebuild-mode) auto-mode-alist))
-
 ;; sql-mode
 (eval-after-load "sql"
   '(load-library "sql-indent"))
 
-;; c mode for arduino
-(add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode))
-
-;; go lang
-(require 'go-mode-autoloads)
-(add-hook 'before-save-hook #'gofmt-before-save)
-
-;; gentoo
-(require 'site-gentoo nil 'noerror)
-
-;; markdown
-(when (require 'markdown-mode nil 'noerror)
-  (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
-
-;; puppet
+;; puppet-mode
 (autoload 'puppet-mode "puppet-mode" "Major mode for editing puppet manifests")
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 
-;; php
-(when (file-directory-p "~/.emacs.d/elisp/php-mode-1.23.0")
-  (load "~/.emacs.d/elisp/php-mode-1.23.0/php-mode-autoloads.el"))
+;; c-mode for ardu-ino files
+(add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode))
 
 ;; --------------------------------------------------------------------
 ;; backup & auto save

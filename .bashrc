@@ -18,7 +18,7 @@ shopt -s histappend
 # environment config
 export BLOCKSIZE=K
 export LESS='-c -r -f'
-export GREP_COLOR=31
+export GREP_COLORS='mt=31'
 export LC_CTYPE='es_MX.UTF-8'
 export DICTIONARY='es_MX,en_US'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'

@@ -1,25 +1,11 @@
 ;; ~/.emacs
 
 ;; --------------------------------------------------------------------
-;; fonts, faces & eveything in the buffer
+;; everything in the buffer
 
-;; set frame title
-(setq frame-title-format "%b")
-
-;; disable toolbar
-(if (functionp 'tool-bar-mode) (tool-bar-mode -1))
-
-;; font, colors & cursor
-(setq default-frame-alist
- '((font . "-*-terminal-medium-r-*-*-14-*-*-*-*-*-iso8859-1")
-   (cursor-color . "Green")
-   (cursor-type . box)
-   (foreground-color . "WhiteSmoke")
-   (face-background . "Black")
-   (background-color . "Black")))
-
-;; pretty fonts
-(global-font-lock-mode t)
+;; load vs-dark theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'vs-dark t)
 
 ;; show matching parens
 (require 'paren)
@@ -181,8 +167,14 @@
  ispell-program-name "aspell"
  ispell-dictionary "es")
 
+;; set frame title
+(setq frame-title-format "%b")
+
 ;; disable menu bar
 (menu-bar-mode -1)
+
+;; disable toolbar
+(if (functionp 'tool-bar-mode) (tool-bar-mode -1))
 
 ;; disable startup message
 (setq inhibit-startup-message t)

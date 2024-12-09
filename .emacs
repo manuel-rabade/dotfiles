@@ -7,6 +7,9 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'vs-dark t)
 
+;; font
+(add-to-list 'default-frame-alist '(font . "Ubuntu Sans Mono-11"))
+
 ;; show matching parens
 (require 'paren)
 

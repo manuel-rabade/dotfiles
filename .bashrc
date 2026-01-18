@@ -15,7 +15,7 @@ HISTCONTROL=ignoredups
 shopt -s checkwinsize
 shopt -s histappend
 
-# environment config
+# shell environment config
 export BLOCKSIZE=K
 export LESS='-c -r -f'
 export GREP_COLORS='mt=31'

@@ -15,3 +15,6 @@ if [ $(uname) = "Linux" ]; then
         /usr/bin/ssh-add ${HOME}/.ssh/id_ed25519
     fi
 fi
+
+# desktop environment config
+export ELECTRON_OZONE_PLATFORM_HINT=wayland
